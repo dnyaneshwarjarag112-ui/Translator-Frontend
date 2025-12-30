@@ -6,7 +6,7 @@ const historyBox = document.getElementById("historyBox");
 
 async function loadHistory() {
   try {
-    const res = await fetch("http://localhost:5000/api/history", {
+    const res = await fetch("https://translator-backend-k6xr.onrender.com/api/history", {
   headers: {
     "Authorization": "Bearer " + localStorage.getItem("token")
   }
@@ -44,3 +44,4 @@ async function loadHistory() {
 }
 
 loadHistory();
+
