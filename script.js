@@ -74,7 +74,7 @@ function speakText(text, lang) {
 // ------------------------
 // 🔥 SAVE TO BACKEND
 function saveTranslationToDB(fromTextVal, toTextVal, fromLang, toLang) {
-    fetch("http://localhost:5000/api/save", {
+    fetch("https://translator-backend-k6xr.onrender.com/api/save", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -238,5 +238,6 @@ logoutBtn.addEventListener("click", () => {
     alert("Logged out successfully");
     window.location.href = "login.html";
 });
+
 
 
