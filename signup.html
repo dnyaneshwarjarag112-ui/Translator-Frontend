@@ -22,7 +22,7 @@ async function signup() {
     }
 
     try {
-        const res = await fetch("http://localhost:5000/api/signup", {
+        const res = await fetch("https://translator-backend-k6xr.onrender.com/api/signup", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ name, email, password })
@@ -42,3 +42,4 @@ async function signup() {
     }
 }
 </script>
+
