@@ -28,10 +28,10 @@ async function login() {
         const data = await res.json();
 
         if (res.ok && data.token) {
-            // Token localStorage me save karo
+        
             localStorage.setItem("token", data.token);
             alert("Login successful");
-            window.location.href = "index.html"; // Translation page pe redirect
+            window.location.href = "translator.html"; 
         } else {
             alert(data.message || "Login failed");
         }
@@ -41,4 +41,5 @@ async function login() {
     }
 }
 </script>
+
 
