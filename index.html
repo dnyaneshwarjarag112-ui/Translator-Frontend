@@ -30,15 +30,22 @@ async function signup() {
 
         const data = await res.json();
 
-        if (res.ok) {
-            alert("Signup successful");
-            window.location.href = "login.html"; // Signup ke baad login page open
-        } else {
-            alert(data.message);
-        }
+       if (res.ok) {
+    alert("Signup successful, please login");
+    window.location.href = "login.html";
+} else {
+    if (data.message === "User already exists") {
+        alert("User already exists, please login");
+        window.location.href = "login.html";
+    } else {
+        alert(data.message);
+    }
+}
+
     } catch (err) {
         console.error(err);
         alert("Signup failed, check server");
     }
 }
 </script>
+
