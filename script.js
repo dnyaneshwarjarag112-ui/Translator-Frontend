@@ -1,4 +1,4 @@
-window.speechSynthesis.getVoices();
+
 if (!localStorage.getItem("token")) {
     location.href = "login.html";
 }
@@ -65,17 +65,9 @@ async function translateLargeText(text, fromLang, toLang) {
 function speakText(text, lang) {
     if (!text.trim()) return;
 
-    // 🟢 voices load hone ka wait
-    let voices = speechSynthesis.getVoices();
-
-    if (!voices.length) {
-        speechSynthesis.onvoiceschanged = () => speakText(text, lang);
-        return;
-    }
-
     const utterance = new SpeechSynthesisUtterance(text);
 
-    const voiceLangMap = {
+    const langMap = {
         en: "en-US",
         hi: "hi-IN",
         ta: "ta-IN",
@@ -89,13 +81,13 @@ function speakText(text, lang) {
         ur: "ur-PK"
     };
 
-    utterance.lang = voiceLangMap[lang] || "en-US";
+    utterance.lang = langMap[lang] || "en-US";
 
-    const voice = voices.find(v => v.lang === utterance.lang);
-    if (voice) utterance.voice = voice;
-
+    // 🔥 IMPORTANT FIX
     speechSynthesis.cancel();
-    speechSynthesis.speak(utterance);
+    setTimeout(() => {
+        speechSynthesis.speak(utterance);
+    }, 300);
 }
 
 
@@ -153,9 +145,12 @@ icons.forEach(icon => {
         if (target.classList.contains("fa-copy")) {
             navigator.clipboard.writeText(text);
         }
-        else if (target.classList.contains("fa-volume-up")) {
-            speakText(text, lang);
-        }
+       else if (target.classList.contains("fa-volume-up")) {
+    if (!speechSynthesis.speaking) {
+        speakText(text, lang);
+    }
+}
+
     });
 });
 
@@ -268,6 +263,7 @@ logoutBtn.addEventListener("click", () => {
     alert("Logged out successfully");
     window.location.href = "login.html";
 });
+
 
 
 
