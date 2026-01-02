@@ -66,19 +66,27 @@ function speakText(text, lang) {
 
     const utterance = new SpeechSynthesisUtterance(text);
 
-   
-    utterance.lang = lang || "en-US";
+    // 🔥 SAFE LANGUAGE MAP
+    const voiceLangMap = {
+        en: "en-US",
+        hi: "hi-IN",
+        ta: "ta-IN",
+        te: "te-IN",
+        mr: "mr-IN",
+        bn: "bn-IN",
+        gu: "gu-IN",
+        kn: "kn-IN",
+        ml: "ml-IN",
+        pa: "pa-IN",
+        ur: "ur-PK"
+    };
 
-    const voices = speechSynthesis.getVoices();
-    const matchedVoice = voices.find(v => v.lang.startsWith(lang));
-
-    if (matchedVoice) {
-        utterance.voice = matchedVoice;
-    }
+    utterance.lang = voiceLangMap[lang] || "en-US";
 
     speechSynthesis.cancel();
     speechSynthesis.speak(utterance);
 }
+
 
 // SAVE TO BACKEND
 function saveTranslationToDB(fromTextVal, toTextVal, fromLang, toLang) {
@@ -249,6 +257,7 @@ logoutBtn.addEventListener("click", () => {
     alert("Logged out successfully");
     window.location.href = "login.html";
 });
+
 
 
 
