@@ -62,11 +62,12 @@ async function translateLargeText(text, fromLang, toLang) {
 // ------------------------
 // Google TTS
 function speakText(text, lang) {
-    if (!text.trim()) return;
+    if (!text || !text.trim()) return;
+
+    speechSynthesis.cancel();
 
     const utterance = new SpeechSynthesisUtterance(text);
 
-    // 🔥 SAFE LANGUAGE MAP
     const voiceLangMap = {
         en: "en-US",
         hi: "hi-IN",
@@ -83,9 +84,15 @@ function speakText(text, lang) {
 
     utterance.lang = voiceLangMap[lang] || "en-US";
 
-    speechSynthesis.cancel();
+    // 🔥 FORCE DEFAULT VOICE (VERY IMPORTANT)
+    const voices = speechSynthesis.getVoices();
+    if (voices.length > 0) {
+        utterance.voice = voices.find(v => v.lang === utterance.lang) || voices[0];
+    }
+
     speechSynthesis.speak(utterance);
 }
+
 
 
 // SAVE TO BACKEND
@@ -257,6 +264,7 @@ logoutBtn.addEventListener("click", () => {
     alert("Logged out successfully");
     window.location.href = "login.html";
 });
+
 
 
 
