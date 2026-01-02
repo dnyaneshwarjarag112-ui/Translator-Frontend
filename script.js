@@ -1,3 +1,4 @@
+window.speechSynthesis.getVoices();
 if (!localStorage.getItem("token")) {
     location.href = "login.html";
 }
@@ -264,6 +265,7 @@ logoutBtn.addEventListener("click", () => {
     alert("Logged out successfully");
     window.location.href = "login.html";
 });
+
 
 
 
