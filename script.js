@@ -63,9 +63,15 @@ async function translateLargeText(text, fromLang, toLang) {
 // ------------------------
 // Google TTS
 function speakText(text, lang) {
-    if (!text || !text.trim()) return;
+    if (!text.trim()) return;
 
-    speechSynthesis.cancel();
+    // 🟢 voices load hone ka wait
+    let voices = speechSynthesis.getVoices();
+
+    if (!voices.length) {
+        speechSynthesis.onvoiceschanged = () => speakText(text, lang);
+        return;
+    }
 
     const utterance = new SpeechSynthesisUtterance(text);
 
@@ -85,15 +91,12 @@ function speakText(text, lang) {
 
     utterance.lang = voiceLangMap[lang] || "en-US";
 
-    // 🔥 FORCE DEFAULT VOICE (VERY IMPORTANT)
-    const voices = speechSynthesis.getVoices();
-    if (voices.length > 0) {
-        utterance.voice = voices.find(v => v.lang === utterance.lang) || voices[0];
-    }
+    const voice = voices.find(v => v.lang === utterance.lang);
+    if (voice) utterance.voice = voice;
 
+    speechSynthesis.cancel();
     speechSynthesis.speak(utterance);
 }
-
 
 
 // SAVE TO BACKEND
@@ -265,6 +268,7 @@ logoutBtn.addEventListener("click", () => {
     alert("Logged out successfully");
     window.location.href = "login.html";
 });
+
 
 
 
