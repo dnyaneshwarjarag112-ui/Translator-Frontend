@@ -65,14 +65,22 @@ function speakText(text, lang) {
     if (!text.trim()) return;
 
     const utterance = new SpeechSynthesisUtterance(text);
-    utterance.lang = lang;
 
-    speechSynthesis.cancel(); // stop previous
+   
+    utterance.lang = lang || "en-US";
+
+    const voices = speechSynthesis.getVoices();
+    const matchedVoice = voices.find(v => v.lang.startsWith(lang));
+
+    if (matchedVoice) {
+        utterance.voice = matchedVoice;
+    }
+
+    speechSynthesis.cancel();
     speechSynthesis.speak(utterance);
 }
 
-// ------------------------
-// 🔥 SAVE TO BACKEND
+// SAVE TO BACKEND
 function saveTranslationToDB(fromTextVal, toTextVal, fromLang, toLang) {
     fetch("https://translator-backend-k6xr.onrender.com/api/save", {
         method: "POST",
@@ -107,7 +115,7 @@ translateBtn.addEventListener("click", async () => {
         const translatedText = await translateLargeText(text, translateFrom, translateTo);
         toText.value = translatedText;
 
-        // ✅ SAVE AFTER TRANSLATION
+        //  SAVE AFTER TRANSLATION
         saveTranslationToDB(text, translatedText, translateFrom, translateTo);
 
     } catch (err) {
@@ -140,13 +148,16 @@ if (SpeechRecognition) {
     const recognition = new SpeechRecognition();
     recognition.interimResults = true;
 
-    micBtn.addEventListener("click", () => {
+   micBtn.addEventListener("click", () => {
+    try {
         recognition.lang = selectTag[0].value;
         recognition.start();
-
         fromText.value = "Listening...";
         toText.value = "";
-    });
+    } catch (e) {
+        alert("Mic permission denied or not supported on this device");
+    }
+});
 
     recognition.addEventListener("result", (e) => {
         const transcript = Array.from(e.results)
@@ -168,7 +179,7 @@ if (SpeechRecognition) {
             const translatedText = await translateLargeText(text, translateFrom, translateTo);
             toText.value = translatedText;
 
-            // ✅ SAVE MIC TRANSLATION ALSO
+            // SAVE MIC TRANSLATION ALSO
             saveTranslationToDB(text, translatedText, translateFrom, translateTo);
 
         } catch (err) {
@@ -238,6 +249,7 @@ logoutBtn.addEventListener("click", () => {
     alert("Logged out successfully");
     window.location.href = "login.html";
 });
+
 
 
 
