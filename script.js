@@ -65,6 +65,15 @@ async function translateLargeText(text, fromLang, toLang) {
 function speakText(text, lang) {
     if (!text.trim()) return;
 
+    const synth = window.speechSynthesis;
+
+    // voices load nahi hui to wait karo
+    let voices = synth.getVoices();
+    if (!voices.length) {
+        synth.onvoiceschanged = () => speakText(text, lang);
+        return;
+    }
+
     const utterance = new SpeechSynthesisUtterance(text);
 
     const langMap = {
@@ -83,11 +92,16 @@ function speakText(text, lang) {
 
     utterance.lang = langMap[lang] || "en-US";
 
-    // 🔥 IMPORTANT FIX
-    speechSynthesis.cancel();
-    setTimeout(() => {
-        speechSynthesis.speak(utterance);
-    }, 300);
+    const matchedVoice = voices.find(v =>
+        v.lang === utterance.lang || v.lang.startsWith(lang)
+    );
+
+    if (matchedVoice) {
+        utterance.voice = matchedVoice;
+    }
+
+    synth.cancel();
+    synth.speak(utterance);
 }
 
 
@@ -145,11 +159,11 @@ icons.forEach(icon => {
         if (target.classList.contains("fa-copy")) {
             navigator.clipboard.writeText(text);
         }
-       else if (target.classList.contains("fa-volume-up")) {
-    if (!speechSynthesis.speaking) {
-        speakText(text, lang);
-    }
+      else if (target.classList.contains("fa-volume-up")) {
+    window.speechSynthesis.resume(); // 🔥 VERY IMPORTANT
+    speakText(text, lang);
 }
+
 
     });
 });
@@ -263,6 +277,7 @@ logoutBtn.addEventListener("click", () => {
     alert("Logged out successfully");
     window.location.href = "login.html";
 });
+
 
 
 
