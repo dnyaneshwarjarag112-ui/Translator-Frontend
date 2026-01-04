@@ -254,3 +254,72 @@ body {
 }
 
 
+/* ===============================
+   MOBILE PROFESSIONAL LAYOUT FIX
+   =============================== */
+@media (max-width: 650px) {
+
+  /* HEADER: History + Logout same row */
+  .header {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .header > div {
+    display: flex;
+    gap: 8px;
+  }
+
+  /* Textareas stack */
+  .text-input {
+    flex-direction: column;
+  }
+
+  .text-input textarea {
+    height: 180px;
+  }
+
+  /* Controls layout */
+  .controls {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+  }
+
+  /* FROM section under Enter Text */
+  .controls .row.from {
+    order: 1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  /* Exchange icon centered */
+  .exchange {
+    order: 2;
+    align-self: center;
+    margin: 10px 0;
+  }
+
+  /* TO section under Translation */
+  .controls .row.to {
+    order: 3;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  /* Icons spacing */
+  .controls .icons {
+    display: flex;
+    gap: 10px;
+  }
+
+  select {
+    margin: 0;
+  }
+}
+
+
+
