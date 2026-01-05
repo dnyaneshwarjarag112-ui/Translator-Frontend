@@ -321,4 +321,34 @@ body {
   }
 }
 
+/* ===== MOVE CONTROLS BETWEEN TEXTAREAS ===== */
+.wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.text-input {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Enter Text */
+.text-input .from-text {
+  order: 1;
+}
+
+/* Controls (icons) */
+.controls {
+  order: 2;
+  border-top: 1px solid #eee;
+  border-bottom: 1px solid #eee;
+}
+
+/* Translation Text */
+.text-input .to-text {
+  order: 3;
+}
+
+
+
 
