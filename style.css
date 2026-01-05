@@ -255,54 +255,66 @@ body {
 
 
 /* ===============================
-   MOBILE ONLY LAYOUT CHANGE
+   MOBILE STRUCTURE FIX (ONLY MOBILE)
    =============================== */
 @media (max-width: 650px) {
 
-  /* Wrapper ko flex bana do */
+  /* Wrapper flow */
   .wrapper {
     display: flex;
     flex-direction: column;
   }
 
-  /* Textareas ko column me rakho */
+  /* Textareas vertically */
   .text-input {
     display: flex;
     flex-direction: column;
   }
 
-  /* Enter Text pehle */
+  /* Enter Text */
   .from-text {
     order: 1;
   }
 
-  /* Controls beech me */
+  /* Controls block BETWEEN textareas */
   .controls {
     order: 2;
-    border-top: 1px solid #eee;
-    border-bottom: 1px solid #eee;
-    margin: 10px 0;
-  }
-
-  /* Translation niche */
-  .to-text {
-    order: 3;
-  }
-
-  /* Controls ka internal layout */
-  .controls {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    padding: 12px;
+    background: #fafafa;
+    border-top: 1px solid #eee;
+    border-bottom: 1px solid #eee;
   }
 
-  .controls .row {
+  /* From row (icons + select SAME LINE) */
+  .controls .row.from {
     display: flex;
     justify-content: space-between;
     align-items: center;
   }
 
+  /* Icons spacing */
+  .controls .icons {
+    display: flex;
+    gap: 10px;
+  }
+
+  /* Exchange icon center */
   .exchange {
-    align-self: center;
+    text-align: center;
+    margin: 10px 0;
+  }
+
+  /* To row (icons + select SAME LINE) */
+  .controls .row.to {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  /* Translation textarea */
+  .to-text {
+    order: 3;
   }
 }
