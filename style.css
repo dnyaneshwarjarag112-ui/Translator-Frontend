@@ -1,0 +1,194 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(120deg, #84fab0, #8fd3f4);
+  padding: 20px;
+  flex-direction: column;
+}
+
+.container {
+  background: #ffffff;
+  width: 100%;
+  max-width: 750px;
+  padding: 30px;
+  border-radius: 16px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+}
+
+/* ===== HEADER ===== */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.header h2 {
+  font-size: 20px;
+  font-weight: 600;
+  color: #333;
+}
+
+.history-btn {
+  background: #f1f3f4;
+  border: none;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 14px;
+  cursor: pointer;
+  color: #444;
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+.history-btn i {
+  margin-right: 6px;
+}
+
+.history-btn:hover {
+  background: #e0e0e0;
+  color: #000;
+}
+
+.logout-btn {
+  background: #ff4d4d;
+  color: white;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 14px;
+  text-decoration: none;
+  margin-left: 10px;
+  transition: background 0.3s ease;
+}
+
+.logout-btn i {
+  margin-right: 6px;
+}
+
+.logout-btn:hover {
+  background: #d93636;
+}
+
+/* ===== TRANSLATOR ===== */
+.wrapper {
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.text-input {
+  display: flex;
+  border-bottom: 1px solid #eee;
+}
+
+.text-input textarea {
+  width: 100%;
+  height: 220px;
+  border: none;
+  padding: 15px;
+  font-size: 16px;
+  outline: none;
+  resize: none;
+  background: #f9f9f9;
+}
+
+.text-input .to-text {
+  border-left: 1px solid #ddd;
+  background: #f2f9ff;
+}
+
+.controls {
+  display: flex;
+  justify-content: space-between;
+  padding: 15px;
+  background: #fafafa;
+  flex-wrap: wrap;
+}
+
+.controls .row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.controls .icons i {
+  margin: 0 5px;
+  font-size: 16px;
+  color: #5a5a5a;
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out;
+}
+
+.controls .icons i:hover {
+  transform: scale(1.2);
+  color: #5372F0;
+}
+
+select {
+  font-size: 16px;
+  border: 1px solid #ddd;
+  padding: 6px 10px;
+  border-radius: 5px;
+  background: #fff;
+  margin: 0 10px;
+}
+
+.exchange {
+  font-size: 20px;
+  color: #888;
+  cursor: pointer;
+  transition: transform 0.3s ease-in-out;
+}
+
+.exchange:hover {
+  transform: rotate(180deg);
+  color: #5372F0;
+}
+
+/* ===== BUTTON ===== */
+.translate-btn {
+  width: 100%;
+  margin-top: 20px;
+  padding: 14px;
+  font-size: 16px;
+  background: #5372F0;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.translate-btn:hover {
+  background: #3a52c4;
+}
+
+/* ===============================
+   FINAL MOBILE FIX (NO OVERLAP)
+   =============================== */
+@media (max-width: 650px) {
+
+  .text-input {
+    flex-direction: column;
+  }
+
+  .controls {
+    position: static;
+    margin: 0;
+  }
+
+  .text-input .to-text {
+    border-left: none;
+    border-top: 1px solid #ddd;
+  }
+}
