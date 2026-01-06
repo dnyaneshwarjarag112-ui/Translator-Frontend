@@ -14,6 +14,7 @@ body {
   justify-content: center;
   background: linear-gradient(120deg, #84fab0, #8fd3f4);
   padding: 20px;
+  flex-direction: column;
 }
 
 .container {
@@ -59,6 +60,7 @@ body {
   background: #e0e0e0;
   color: #000;
 }
+
 .logout-btn {
   background: #ff4d4d;
   color: white;
@@ -171,10 +173,19 @@ select {
   background: #3a52c4;
 }
 
-/* ===== RESPONSIVE ===== */
+/* ===============================
+   MOBILE FIX (ONLY REQUIRED)
+   =============================== */
 @media (max-width: 650px) {
+
   .text-input {
     flex-direction: column;
+  }
+
+  /* REMOVE overlap */
+  .controls {
+    position: static;
+    margin: 0;
   }
 
   .text-input .to-text {
@@ -182,119 +193,10 @@ select {
     border-top: 1px solid #ddd;
   }
 
-  .controls {
-    flex-direction: column;
-    gap: 10px;
-  }
-}
-
-/* ===============================
-   LOGIN & SIGNUP PAGE STYLES
-   =============================== */
-
-body > h2 {
-  text-align: center;
-  margin-bottom: 20px;
-  font-size: 26px;
-  font-weight: 600;
-  color: #333;
-}
-
-/* Inputs for login & signup */
-body > input {
-  display: block;
-  width: 100%;
-  max-width: 380px;
-  margin: 10px auto;
-  padding: 12px 14px;
-  font-size: 15px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  outline: none;
-  transition: border-color 0.3s ease;
-}
-
-body > input:focus {
-  border-color: #5372F0;
-}
-
-/* Login / Signup button */
-body > button {
-  display: block;
-  width: 100%;
-  max-width: 380px;
-  margin: 18px auto 0;
-  padding: 12px;
-  font-size: 16px;
-  background: #5372F0;
-  color: #fff;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: background 0.3s ease;
-}
-
-body > button:hover {
-  background: #3a52c4;
-}
-
-body {
-  flex-direction: column;
-}
-
-@media (max-width: 480px) {
-  body > h2 {
-    font-size: 22px;
-  }
-
-  body > input,
-  body > button {
-    max-width: 100%;
-  }
-}
-
-
-/* ===============================
-   FINAL MOBILE FIX (WORKING 100%)
-   =============================== */
-@media (max-width: 650px) {
-
-  /* Stack textareas */
-  .text-input {
-    flex-direction: column;
-  }
-
-  .text-input .to-text {
-    border-left: none;
-    border-top: 1px solid #ddd;
-  }
-
-  /* Move controls UP between textareas */
-  .controls {
-    position: relative;
-    margin-top: -220px;   /* pull controls up */
-    margin-bottom: 220px; /* space for translation */
-    z-index: 2;
-    background: #fafafa;
-    border-top: 1px solid #eee;
-    border-bottom: 1px solid #eee;
-  }
-
-  /* Keep rows horizontal */
-  .controls .row.from,
-  .controls .row.to {
-    display: flex;
+  /* Header same as laptop */
+  .header {
+    flex-direction: row;
     justify-content: space-between;
     align-items: center;
-  }
-
-  .controls .icons {
-    display: flex;
-    gap: 10px;
-  }
-
-  .exchange {
-    text-align: center;
-    margin: 10px 0;
   }
 }
